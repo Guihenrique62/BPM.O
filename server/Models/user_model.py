@@ -7,7 +7,7 @@ load_dotenv()
 
 class UserModel:
 
-    def criar_usuario(nome, email, senha, nome_usuario):
+    def criar_usuario(self, nome, email, senha, nome_usuario):
         try:
             hashed_senha = bcrypt.hashpw(senha.encode('utf-8'), bcrypt.gensalt())
 
@@ -19,7 +19,7 @@ class UserModel:
             )
             cursor = conn.cursor()
 
-            query = "INSERT INTO tb_CLIENTE (nome, email, senha, nome_usuario) VALUES (%s, %s, %s, %s)"
+            query = "INSERT INTO tb_USUARIO (nome, email, senha, nome_usuario) VALUES (%s, %s, %s, %s)"
             cursor.execute(query, (nome, email, hashed_senha.decode('utf-8'), nome_usuario))
             conn.commit()
 
@@ -29,7 +29,7 @@ class UserModel:
         except mysql.connector.Error as err:
             return f"Erro ao criar usuário: {err}"
 
-    def autenticar_usuario(email, senha):
+    def autenticar_usuario(self,email, senha):
         try:
             conn = mysql.connector.connect(
                 host = os.getenv("DATABASE_HOST"),
@@ -39,7 +39,7 @@ class UserModel:
             )
             cursor = conn.cursor()
 
-            query = "SELECT senha FROM tb_CLIENTE WHERE email = %s"
+            query = "SELECT senha FROM tb_USUARIO WHERE email = %s"
             cursor.execute(query, (email,))
             row = cursor.fetchone()
 
