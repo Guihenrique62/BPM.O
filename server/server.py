@@ -16,5 +16,10 @@ def autenticar_usuario():
     resposta, status_code = controller.autenticar_usuario(dados_login)
     return jsonify(resposta), status_code
 
+@app.route('/api/excluir-usuario/<int:id_usuario>', methods=['DELETE'])
+def excluir_usuario(id_usuario):
+    resposta, status_code = controller.excluir_usuario(id_usuario)
+    return jsonify(resposta), status_code
+
 if __name__ == '__main__':
     app.run(debug=True)

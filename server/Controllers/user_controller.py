@@ -25,3 +25,11 @@ class UserController:
             return {'mensagem': mensagem}, 200  # 200 OK
         except Exception as e:
             return {'mensagem': str(e)}, 500  # 500 Internal Server Error
+
+    def excluir_usuario(self, id_usuario):
+            user_model = UserModel()
+            try:
+                mensagem = user_model.excluir_usuario(id_usuario)
+                return {'mensagem': mensagem}, 200  # 200 OK
+            except Exception as e:
+                return {'mensagem': str(e)}, 500  # 500 Internal Server Error

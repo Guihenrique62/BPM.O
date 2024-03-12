@@ -125,7 +125,7 @@ class CreateTable:
                 CREATE TABLE IF NOT EXISTS tb_USUARIO (
                     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
                     nome VARCHAR(60) NOT NULL,
-                    email VARCHAR(50) NOT NULL,
+                    email VARCHAR(50) UNIQUE NOT NULL,
                     senha VARCHAR(255) NOT NULL,
                     nome_usuario VARCHAR(50)
                 );

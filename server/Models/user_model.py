@@ -60,6 +60,22 @@ class UserModel:
             if conn:
                 conn.close()
 
+    def excluir_usuario(self, id_usuario):
+            try:
+                conn = mysql.connector.connect(
+                host = os.getenv("DATABASE_HOST"),
+                user = os.getenv("DATABASE_USER"),
+                password= os.getenv("DATABASE_PASSWORD"),
+                database= os.getenv("DATABASE")
+                )
+                cursor = conn.cursor()
+
+                query = "DELETE FROM tb_USUARIO WHERE id_usuario = %s"
+                cursor.execute(query, (id_usuario,))
+                conn.commit()
+                return "Usuário excluído com sucesso."
+            except Exception as err:
+                return f"Erro ao excluir usuário: {err}"
 # Exemplo de utilização
 if __name__ == "__main__":
     model = UserModel()
